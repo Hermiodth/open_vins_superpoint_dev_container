@@ -1,0 +1,9 @@
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opencv/opencv.git
+[submodule "opencv_contrib"]
+	path = opencv_contrib
+	url = https://github.com/opencv/opencv_contrib.git
+[submodule "ov_superpointglue_ws/src/open_vins_with_superpoint"]
+	path = ov_superpointglue_ws/src/open_vins_with_superpoint
+	url = git@github.com:Hermiodth/open_vins_with_superpoint.git
