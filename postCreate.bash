@@ -2,13 +2,11 @@
 
 echo "postCreate script started"
 
-bash ceres_build.bash
-
-echo "login -f ubuntu" >> /root/.bashrc
-echo "cd /openvins_play" >> /home/ubuntu/.bashrc
-echo "source /opt/ros/jazzy/setup.bash" >> /home/ubuntu/.bashrc
-echo "source /openvins_play/install/setup.bash" >> /home/ubuntu/.bashrc
-
-rosdep update
+cd opencv
+mkdir build
+cd build
+cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules ..
+make -j 30
+sudo make install
 
 echo "postCreate script finished"

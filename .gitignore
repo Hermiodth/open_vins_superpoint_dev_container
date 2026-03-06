@@ -6,3 +6,6 @@ log/
 V1_01_easy.bag
 libtorch
 libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+ov_superpointglue_ws/.catkin_workspace
+ov_superpointglue_ws/devel/
+ov_superpointglue_ws/src/CMakeLists.txt

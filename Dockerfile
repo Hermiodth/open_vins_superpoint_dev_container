@@ -49,7 +49,23 @@ CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config_test_clion"]
 
 RUN echo "login -f ubuntu" >> /root/.bashrc
 
-# =============================================================================
+# ===========================================================
 #RUN rosdep update
 RUN passwd -d ubuntu
 RUN adduser ubuntu sudo
+
+# ======================= setup Torch =======================
+# Copy pre-built LibTorch into the image
+COPY libtorch /opt/libtorch
+
+# Make CMake's find_package(Torch) able to locate it
+ENV CMAKE_PREFIX_PATH="/opt/libtorch:${CMAKE_PREFIX_PATH}"
+
+# Add the shared library to the runtime linker search path
+ENV LD_LIBRARY_PATH="/opt/libtorch/lib:${LD_LIBRARY_PATH}"
+
+# ====================== build OpenCV ======================
+COPY opencv /opt/opencv
+COPY opencv_contrib /opt/opencv_contrib
+
+RUN cd /opt/opencv/ && mkdir build && cd build && cmake -DOPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib/modules .. && make -j 30 && sudo make install
